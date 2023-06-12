@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CurrencyImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">trading_system</a> &gt; <a href="index.source.html" class="el_package">com.sapient.dao</a> &gt; <span class="el_source">CurrencyImpl.java</span></div><h1>CurrencyImpl.java</h1><pre class="source lang-java linenums">package com.sapient.dao;
+
+import com.sapient.exceptions.BankNameException;
+import com.sapient.facades.CurrencyFacade;
+import com.sapient.models.Bank;
+import com.sapient.models.Currency;
+import com.sapient.models.Symbol;
+import lombok.Data;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
+
+<span class="nc bnc" id="L15" title="All 22 branches missed.">@Data</span>
+public class CurrencyImpl implements CurrencyFacade {
+<span class="nc" id="L17">    private List&lt;Currency&gt;currencyData = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L18">    private File file;</span>
+<span class="nc" id="L19">    public CurrencyImpl(String fileName) throws IOException {</span>
+<span class="nc" id="L20">        ResourceBundle resourceBundle=ResourceBundle.getBundle(&quot;db&quot;);</span>
+<span class="nc" id="L21">        String path=resourceBundle.getString(&quot;location&quot;);</span>
+<span class="nc" id="L22">        this.file = new File(path,fileName);</span>
+<span class="nc bnc" id="L23" title="All 2 branches missed.">        if(file.exists()){</span>
+<span class="nc" id="L24">            getAllCurrencyData();</span>
+        }
+        else
+        {
+<span class="nc bnc" id="L28" title="All 2 branches missed.">            if(file.createNewFile())</span>
+<span class="nc" id="L29">                getAllCurrencyData();</span>
+        }
+<span class="nc" id="L31">    }</span>
+
+    @Override
+    public void addCurrency(Currency currency) throws IOException {
+<span class="nc" id="L35">        this.currencyData.add(currency);</span>
+<span class="nc bnc" id="L36" title="All 2 branches missed.">        if(file.exists()){</span>
+<span class="nc" id="L37">            updateData();</span>
+        }
+        else
+        {
+<span class="nc bnc" id="L41" title="All 2 branches missed.">            if(file.createNewFile())</span>
+<span class="nc" id="L42">                updateData();</span>
+        }
+<span class="nc" id="L44">    }</span>
+
+    @Override
+    public void editCurrency(int id, Currency currency) throws IOException {
+<span class="nc bnc" id="L48" title="All 2 branches missed.">        for(int i=0; i&lt;this.currencyData.size(); i++){</span>
+<span class="nc bnc" id="L49" title="All 2 branches missed.">            if(this.currencyData.get(i).getCurrencyId() == id){</span>
+<span class="nc" id="L50">                    this.currencyData.set(i,currency);</span>
+            }
+        }
+<span class="nc bnc" id="L53" title="All 2 branches missed.">        if(file.exists()){</span>
+<span class="nc" id="L54">            updateData();</span>
+        }
+        else
+        {
+<span class="nc bnc" id="L58" title="All 2 branches missed.">            if(file.createNewFile())</span>
+<span class="nc" id="L59">                updateData();</span>
+        }
+<span class="nc" id="L61">    }</span>
+
+    @Override
+    public void deleteCurrency(int id) throws IOException {
+<span class="nc bnc" id="L65" title="All 2 branches missed.">        for(int i=0; i&lt;this.currencyData.size(); i++){</span>
+<span class="nc bnc" id="L66" title="All 2 branches missed.">            if(this.currencyData.get(i).getCurrencyId() == id){</span>
+<span class="nc" id="L67">                this.currencyData.remove(i);</span>
+<span class="nc" id="L68">                break;</span>
+            }
+        }
+<span class="nc bnc" id="L71" title="All 2 branches missed.">        if(file.exists()){</span>
+<span class="nc" id="L72">            updateData();</span>
+        }
+        else
+        {
+<span class="nc bnc" id="L76" title="All 2 branches missed.">            if(file.createNewFile())</span>
+<span class="nc" id="L77">                updateData();</span>
+        }
+<span class="nc" id="L79">    }</span>
+
+    private void updateData() throws IOException {
+<span class="nc" id="L82">        try (FileWriter fw = new FileWriter(file);</span>
+<span class="nc" id="L83">             BufferedWriter bufferedWriter = new BufferedWriter(fw)) {</span>
+<span class="nc bnc" id="L84" title="All 2 branches missed.">            for(Currency c:this.currencyData){</span>
+<span class="nc" id="L85">                bufferedWriter.write(String.valueOf(c.getCurrencyId())+',');</span>
+<span class="nc" id="L86">                bufferedWriter.write(c.getCurrencyDescription()+&quot;,&quot;);</span>
+<span class="nc" id="L87">                bufferedWriter.write(String.valueOf(c.getCurrencyCode())+',');</span>
+<span class="nc" id="L88">                bufferedWriter.write(c.getCurrencySymbol()+&quot;,&quot;);</span>
+<span class="nc" id="L89">                bufferedWriter.write(c.getCountryUsingCurrency()+&quot;\n&quot;);</span>
+<span class="nc" id="L90">            }</span>
+        }
+<span class="nc" id="L92">    }</span>
+
+    private void getAllCurrencyData() throws IOException {
+<span class="nc" id="L95">        String line=null;</span>
+<span class="nc" id="L96">        String[] fields=null;</span>
+<span class="nc" id="L97">        try (FileReader fw = new FileReader(file);</span>
+<span class="nc" id="L98">             BufferedReader bufferedReader = new BufferedReader(fw)) {</span>
+<span class="nc bnc" id="L99" title="All 2 branches missed.">            while((line=bufferedReader.readLine())!=null){</span>
+<span class="nc" id="L100">                fields = line.split(&quot;,&quot;);</span>
+<span class="nc" id="L101">                Currency currency = new Currency(Integer.parseInt(fields[0]),fields[1],Integer.parseInt(fields[2]),Symbol.valueOf(fields[3]),fields[4]);</span>
+<span class="nc" id="L102">                this.currencyData.add(currency);</span>
+<span class="nc" id="L103">            }</span>
+        }
+<span class="nc" id="L105">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

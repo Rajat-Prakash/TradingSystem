@@ -1,0 +1,14 @@
+
+t
+java:S1450"WRemove the "password" field and declare it as a local variable in the relevant methods.(òŸù8Óãùš0
+
+java:S1450"]Remove the "resourceBundle" field and declare it as a local variable in the relevant methods.(üÍÕÿÿÿÿÿ8Óãùš0
+t
+java:S1450"RRemove the "url" field and declare it as a local variable in the relevant methods.(¿¿Ïòûÿÿÿÿ8Óãùš0
+y
+java:S1450"WRemove the "userName" field and declare it as a local variable in the relevant methods.(³–ÒÆıÿÿÿÿ8Óãùš0
+\
+java:S1118
+":Add a private constructor to hide the implicit public one.(˜ÆÓ“ÿÿÿÿÿ8“Óãùš0
+V
+java:S1128"4Remove this unused import 'com.mongodb.MongoClient'.(´§ø»ıÿÿÿÿ8»Óãùš0

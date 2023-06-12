@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CurrencyUtility.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">trading_system</a> &gt; <a href="index.source.html" class="el_package">com.sapient.utility</a> &gt; <span class="el_source">CurrencyUtility.java</span></div><h1>CurrencyUtility.java</h1><pre class="source lang-java linenums">package com.sapient.utility;
+
+import com.sapient.dao.CurrencyImpl;
+import com.sapient.models.Currency;
+import com.sapient.models.Symbol;
+
+import java.io.IOException;
+
+<span class="nc" id="L9">public class CurrencyUtility {</span>
+    public void performCurrencyOperations() throws IOException {
+<span class="nc" id="L11">            CurrencyImpl currencyImpl = new CurrencyImpl(&quot;currency.csv&quot;);</span>
+<span class="nc" id="L12">            Currency currency = new Currency(1,&quot;Indian Currency&quot;,101, Symbol.RUPEE,&quot;India&quot;);</span>
+<span class="nc" id="L13">            currencyImpl.addCurrency(currency);</span>
+<span class="nc" id="L14">            Currency currency1 = new Currency(2,&quot;USA currency&quot;,102,Symbol.DOLLAR,&quot;USA&quot;);</span>
+<span class="nc" id="L15">            currencyImpl.addCurrency(currency1);</span>
+<span class="nc" id="L16">            Currency currency1Updated = new Currency(2,&quot;United State of America Currency&quot;,102,Symbol.DOLLAR,&quot;USA&quot;);</span>
+<span class="nc" id="L17">            currencyImpl.editCurrency(2,currency1Updated);</span>
+<span class="nc" id="L18">            Currency currency2 = new Currency(3,&quot;Russia currency&quot;,103,Symbol.YUAN,&quot;Russia&quot;);</span>
+<span class="nc" id="L19">            currencyImpl.addCurrency(currency2);</span>
+<span class="nc" id="L20">            currencyImpl.deleteCurrency(3);</span>
+<span class="nc" id="L21">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
